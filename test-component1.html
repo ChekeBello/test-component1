@@ -1,0 +1,52 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="test-component1">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+        button {
+            display: inline-block;
+        }
+    </style>
+    <h2>[[text]]</h2>
+      <p>Este es un ejercicio de examen.</p>
+      <p>Al precionar el "Boton 1" se presentara una lista.</p>
+      <p>Al precionar el "Boton 2" se presentara una tabla.</p>
+      <button on-click="lauchFirstButton">Boton1</button>
+      <button on-click="lauchSecondButton">Boton2</button>
+  </template>
+
+  <script>
+    /**
+     * `test-component1`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class TestComponent1 extends Polymer.Element {
+      static get is() { return 'test-component1'; }
+      static get properties() {
+        return {
+          text: {
+            type: String,
+            value: 'Ejercicio de Examen'
+          }
+        };
+      }
+        lauchFirstButton(){
+            this.dispatchEvent(new CustomEvent('one-of-two-pressed',{bubbles:true, composed: true, detail: "first"}));
+        }
+
+        lauchSecondButton(){
+            this.dispatchEvent(new CustomEvent('one-of-two-pressed',{bubbles:true, composed: true, detail: "second"}));
+        }
+    }
+    
+
+    window.customElements.define(TestComponent1.is, TestComponent1);
+  </script>
+</dom-module>
